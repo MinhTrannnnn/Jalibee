@@ -4,11 +4,14 @@
  */
 package model;
 
+import frame.ForgotPasswordFrame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -41,7 +44,7 @@ public class AdminDataAccess {
         try {
             ps=con.prepareStatement("select * from admin where username=?");
             ps.setString(1, username); // Gán username cho placeholder vị trí 1 trong câu truy vấn
-            rs=ps.executeQuery();
+            rs=ps.executeQuery(); 
             if(rs.next()){
                 return true;
             }
@@ -61,6 +64,66 @@ public class AdminDataAccess {
             ps.setString(5,admin.getAns());
             return ps.executeUpdate() >0; //thực thi câu lệnh insert
         } catch (Exception e) {
+        }
+        return false;
+    }
+    
+    public boolean getSecurityQues(String username){
+        try {
+            String sql="select * from admin where username =?";
+            ps=con.prepareStatement(sql);
+            ps.setString(1, username);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                ForgotPasswordFrame.jTextField1.setText(rs.getString(4));
+                return true;
+            }
+        } catch (SQLException e) {
+        }
+        return false;
+    }
+    
+    public boolean checkAns(String username, String nAns){
+        try {
+            ps=con.prepareStatement("select ans from admin where username =?");
+            ps.setString(1, username);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                String ans=rs.getString(1);
+                if(ans.equals(nAns)){
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDataAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    public boolean setPassword(String username,String password){
+        try {
+            ps=con.prepareStatement("update admin set password=? where username=?");
+            ps.setString(1, password);
+            ps.setString(2, username);
+            return ps.executeUpdate()>0;
+        } catch (SQLException ex) {
+            return false;
+        }   
+    }
+    
+    public boolean checkpass(String username,String password){
+        try {
+            ps=con.prepareStatement("select password from admin where username=?");
+            ps.setString(1, username);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                String check=rs.getString(1);
+                if(check.equals(password)){
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            return false;
         }
         return false;
     }
