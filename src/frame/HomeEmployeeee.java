@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package frame;
+import CustomerFrame.HomeFrame;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.time.LocalDate;
@@ -17,7 +18,6 @@ import model.EmployeeDataAccess;
  * @author Admin
  */
 public class HomeEmployeeee extends javax.swing.JFrame {
-//    250 680
     DefaultTableModel model;
     EmployeeDataAccess eda=new EmployeeDataAccess();
     LocalDate currentDate=LocalDate.now();
@@ -37,6 +37,7 @@ public class HomeEmployeeee extends javax.swing.JFrame {
         jTable1.setShowGrid(true);
         jTable1.setGridColor(Color.BLACK);
         jTable1.setBackground(Color.WHITE);
+        jTable1.setSelectionBackground(Color.gray);
         jTable1.getTableHeader().setReorderingAllowed(false);
     }
     
@@ -117,6 +118,7 @@ public class HomeEmployeeee extends javax.swing.JFrame {
         ViewOrderPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel21 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -396,6 +398,14 @@ public class HomeEmployeeee extends javax.swing.JFrame {
 
         jPanel1.add(jPnMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1020, 570));
 
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logout (1).png"))); // NOI18N
+        jLabel21.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel21MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 20, 60, 50));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -448,6 +458,12 @@ public class HomeEmployeeee extends javax.swing.JFrame {
         new ManageProductFrame().setVisible(true);
     }//GEN-LAST:event_jLabel9MouseClicked
 
+    private void jLabel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel21MouseClicked
+        // TODO add your handling code here:
+        new HomeFrame().setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jLabel21MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -499,6 +515,7 @@ public class HomeEmployeeee extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
