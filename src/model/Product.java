@@ -29,7 +29,6 @@ public class Product {
         this.pname = pname;
     }
 
-    
 
     public double getPrice() {
         return price;

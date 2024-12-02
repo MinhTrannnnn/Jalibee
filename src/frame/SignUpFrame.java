@@ -17,13 +17,14 @@ import model.AdminDataAccess;
  * @author Admin
  */
 public class SignUpFrame extends javax.swing.JFrame {
-    AdminDataAccess ada=new AdminDataAccess();
+//    AdminDataAccess ada=new AdminDataAccess();
     /**
      * Creates new form SignUpFrame
      */
+    Admin admin=new Admin();
     public SignUpFrame() throws SQLException {
         initComponents();
-        jTextField1.setText(String.valueOf(ada.getMaxAdmin()));
+        jTextField1.setText(String.valueOf(admin.getMaxAdmin()));
         jTextField1.setEnabled(false);
     }
 
@@ -212,15 +213,15 @@ public class SignUpFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(check()){
             String username=jTextField2.getText().trim();
-            if(!ada.isAdminExist(username)){
+            if(!admin.isAdminExist(username)){
                 try {
-                    Admin admin=new Admin();
-                    admin.setId(ada.getMaxAdmin());
-                    admin.setUsername(username);
-                    admin.setPassword(String.valueOf(jPasswordField1.getPassword()));
-                    admin.setsQues((String)jComboBox1.getSelectedItem());
-                    admin.setAns(jTextField5.getText());
-                    if(ada.insert(admin)){
+                    Admin ad=new Admin();
+                    ad.setId(admin.getMaxAdmin());
+                    ad.setUsername(username);
+                    ad.setPassword(String.valueOf(jPasswordField1.getPassword()));
+                    ad.setsQues((String)jComboBox1.getSelectedItem());
+                    ad.setAns(jTextField5.getText());
+                    if(admin.insert(ad)){
                         JOptionPane.showMessageDialog(this, "Admin Successfully Created");
                         new LoginFrame().setVisible(true);
                         setVisible(false);

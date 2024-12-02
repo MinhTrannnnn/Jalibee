@@ -56,7 +56,7 @@ public class EmployeeDataAccess {
     }
     
     public void getManageProducts(JTable table){
-        String sql="select * from product order by pid desc";
+        String sql="select * from product order by pid asc";
         
         try {
             ps=con.prepareStatement(sql);
@@ -77,7 +77,7 @@ public class EmployeeDataAccess {
             Logger.getLogger(EmployeeDataAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+//    
     public boolean update(Product product){
         try {
             ps=con.prepareStatement("update product set pname =? , price = ? where pid=?");
@@ -98,5 +98,70 @@ public class EmployeeDataAccess {
         } catch (SQLException ex) {
             return false;
         }
+    }
+    
+    public void getPaymentDetail(JTable table){
+        try {
+            ps=con.prepareStatement("select * from payment");
+            rs=ps.executeQuery();
+            Object row[];
+            DefaultTableModel model=(DefaultTableModel) table.getModel();
+            while(rs.next()){
+                row=new Object[6];
+                row[0]=rs.getInt(1);
+                row[1]=rs.getString(2);
+                row[2]=rs.getString(3);
+                row[3]=rs.getString(4);
+                row[4]=rs.getDouble(5);
+                row[5]=rs.getString(6);
+                model.addRow(row);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDataAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public int getTotalProducts(){
+        int count=0;
+        try {
+            ps=con.prepareStatement("select count(pid) from product");
+            rs=ps.executeQuery();
+            while(rs.next()){
+                 count=rs.getInt(1);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDataAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+    
+    public double getTodayRevenue(String date){
+        double revenue=0.0;
+        try {
+            ps=con.prepareStatement("select sum(total) from payment where pDate =?");
+            ps.setString(1, date);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                revenue=rs.getDouble(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDataAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return revenue;
+    }
+    
+    public double getTotalRevenue(){
+        double revenue=0.0;
+        try {
+            ps=con.prepareStatement("select sum(total) from payment");
+            rs=ps.executeQuery();
+            while(rs.next()){
+                revenue=rs.getDouble(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDataAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return revenue;
     }
 }

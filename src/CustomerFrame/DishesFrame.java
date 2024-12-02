@@ -6,12 +6,16 @@ package CustomerFrame;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 import model.EmployeeDataAccess;
 
 /**
@@ -29,37 +33,26 @@ public class DishesFrame extends javax.swing.JFrame {
         initComponents();
         tableProduct();
     }
-//    private void tableProduct() {
-//    // Tạo DefaultTableModel với tên cột phù hợp
-//    String[] columnNames = {"Product Name", "Price", "Image"};
-//    model = new DefaultTableModel(columnNames, 0);
-//    jTable1.setModel(model);  // Gán model cho JTable
-//
-//    // Lấy tất cả sản phẩm và thêm vào model
-//    eda.getAllProducts(jTable1); 
-//
-//    // Thiết lập các thuộc tính của JTable
-//    jTable1.setRowHeight(100);
-//    jTable1.setShowGrid(true);
-//    jTable1.setGridColor(Color.black);
-//    jTable1.setBackground(Color.red);
-//    jTable1.setSelectionBackground(Color.gray);
-//    jTable1.getTableHeader().setReorderingAllowed(false);
-//
-//    // Sử dụng TableCellRenderer cho cột ảnh (column 3)
-//    jTable1.getColumnModel().getColumn(2).setCellRenderer(new DishesFrame.ImageRenderer());
-//}
     
     private void tableProduct(){
         eda.getAllProducts(jTable1);
         model = (DefaultTableModel) jTable1.getModel();
-        jTable1.setRowHeight(100);
+        jTable1.setRowHeight(120);
         jTable1.setShowGrid(true);
         jTable1.setGridColor(Color.black);
         jTable1.setBackground(Color.white);
         jTable1.setSelectionBackground(Color.gray);
         jTable1.setModel(model);
+        jTable1.getTableHeader().setFont(new Font("Arial", Font.BOLD, 15)); 
+        JTableHeader header = jTable1.getTableHeader();
+        header.setPreferredSize(new Dimension(header.getPreferredSize().width, 30)); // Đặt chiều cao header là 50px
         jTable1.getTableHeader().setReorderingAllowed(false);
+        
+        TableColumnModel columnModel = jTable1.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(200); // Cột 0 có độ rộng 150
+        columnModel.getColumn(1).setPreferredWidth(200); // Cột 1 có độ rộng 200
+        columnModel.getColumn(2).setPreferredWidth(20); // Cột 2 có độ rộng 250
+        
         jTable1.getColumnModel().getColumn(2).setCellRenderer(new DishesFrame.ImageRenderer());
     }
     
@@ -89,11 +82,16 @@ public class DishesFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1125, 710));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1125, 690));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 22)); // NOI18N
         jLabel5.setText("Home");
         jLabel5.setToolTipText("");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 22)); // NOI18N
         jLabel6.setText("Dishes");
@@ -102,14 +100,29 @@ public class DishesFrame extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 22)); // NOI18N
         jLabel7.setText("About");
         jLabel7.setToolTipText("");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 22)); // NOI18N
         jLabel10.setText("Log out");
         jLabel10.setToolTipText("");
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 0, 22)); // NOI18N
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cart (3).png"))); // NOI18N
         jLabel11.setToolTipText("");
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
@@ -194,12 +207,37 @@ public class DishesFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+        new CustomerHomeFrame().setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+        new AboutFrame().setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        // TODO add your handling code here:
+        new OrderFrame().setVisible(true);
+        setVisible(false);
+        
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        // TODO add your handling code here:
+        new HomeFrame().setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jLabel10MouseClicked
 
     private class ImageRenderer extends DefaultTableCellRenderer{
         @Override
@@ -207,7 +245,7 @@ public class DishesFrame extends javax.swing.JFrame {
             JLabel jl=new JLabel();
             if (value != null) {  // Kiểm tra xem value có phải là null không
                 byte[] bytes = (byte[]) value;
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(bytes).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(bytes).getImage().getScaledInstance(jTable1.getColumnModel().getColumn(2).getWidth(), 120, Image.SCALE_DEFAULT));
                 jl.setIcon(imageIcon);
             } else {
                 jl.setText("No Image");  // Hoặc bạn có thể để trống nếu không có hình ảnh
@@ -215,10 +253,10 @@ public class DishesFrame extends javax.swing.JFrame {
             // Nếu dòng được chọn, thay đổi nền thành màu xám
             if (isSelected) {
                 jl.setBackground(Color.GRAY);
-                jl.setOpaque(true);  // Đảm bảo rằng màu nền sẽ được hiển thị
+                 // Đảm bảo rằng màu nền sẽ được hiển thị
             } else {
                 jl.setBackground(table.getBackground());  // Trả lại nền mặc định khi không được chọn
-                jl.setOpaque(false);  // Tắt nền nếu không được chọn
+                  // Tắt nền nếu không được chọn
             }
             return jl;
         }

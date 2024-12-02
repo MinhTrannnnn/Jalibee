@@ -143,17 +143,7 @@ public class AddProductFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-//         TODO add your handling code here:
-//        for (double i = 0.1; i <= 1.0; i += 0.1) {
-//            String s = "" + i;
-//            float f = Float.parseFloat(s);
-//            this.setOpacity(f);
-//            try {
-//
-//                Thread.sleep(10);
-//            } catch (InterruptedException ex) {
-//            }
-//        }
+
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

@@ -4,6 +4,19 @@
  */
 package CustomerFrame;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.print.PrinterException;
+import java.text.MessageFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import model.CustomerDataAccess;
+import model.Payment;
+
 /**
  *
  * @author Admin
@@ -13,10 +26,51 @@ public class CartFrame extends javax.swing.JFrame {
     /**
      * Creates new form CartFrame
      */
+    int rowIndex;
+    CustomerDataAccess cda=new CustomerDataAccess();
+    DefaultTableModel model;
+    LocalDate today =LocalDate.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    
+    private OrderFrame orderFrame; 
+    
     public CartFrame() {
         initComponents();
+        tableProduct();
+        
+        int cartid=cda.getCartID()-1;  
+        jTextField3.setText(String.format("%.2f", cda.getTotalFromCart(cartid)));
+        jTextField5.setEditable(false);
     }
-
+    public CartFrame(OrderFrame orderFrame) {
+        this.orderFrame = orderFrame;  // Lưu tham chiếu đến OrderFrame
+        initComponents();
+        tableProduct();
+        
+        int cartid = cda.getCartID() - 1;
+        jTextField3.setText(String.format("%.2f", cda.getTotalFromCart(cartid)));
+        jTextField5.setEditable(false);
+    }
+    
+    public void tableProduct(){
+        cda.getCart(jTable1);
+        jTable1.setRowHeight(110);
+        JTableHeader header = jTable1.getTableHeader();
+        header.setPreferredSize(new Dimension(header.getPreferredSize().width, 30)); // Đặt chiều cao là 50px
+        jTable1.setDefaultEditor(Object.class, null); // vô hiệu hóa khả năng chỉnh sửa của bảng
+        jTable1.setRowHeight(120);
+        jTable1.setShowGrid(true);
+        jTable1.setGridColor(Color.BLACK);
+        jTable1.setBackground(Color.WHITE);
+        jTable1.setSelectionBackground(Color.gray);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.getColumnModel().getColumn(0).setResizable(false);
+        jTable1.getColumnModel().getColumn(1).setResizable(false);
+        jTable1.getColumnModel().getColumn(2).setResizable(false);
+        jTable1.getColumnModel().getColumn(3).setResizable(false);
+        jTable1.getColumnModel().getColumn(4).setResizable(false);
+        jTable1.getColumnModel().getColumn(5).setResizable(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,22 +80,268 @@ public class CartFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jTextField5 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable1.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cart ID", "Product ID", "Product Name", "Quantity", "Price", "Total"
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 770, 540));
+
+        jButton1.setBackground(new java.awt.Color(223, 24, 54));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 30)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Payment");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 660, 620, 70));
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jLabel3.setText("Total ($)");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 170, 40));
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jLabel4.setText("Customer Name");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 170, 40));
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jLabel5.setText("Cash ($)");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 170, 30));
+
+        jTextField2.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 280, 50));
+
+        jTextField3.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 280, 50));
+
+        jTextField4.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField4KeyReleased(evt);
+            }
+        });
+        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 280, 50));
+
+        jButton2.setBackground(new java.awt.Color(255, 197, 34));
+        jButton2.setFont(new java.awt.Font("Times New Roman", 0, 19)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trash (2).png"))); // NOI18N
+        jButton2.setText("Delete");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 140, 50));
+
+        jTextField5.setFont(new java.awt.Font("Times New Roman", 0, 20)); // NOI18N
+        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 280, 50));
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jLabel7.setText("Change ($)");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, 170, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/backkkk (1).png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 50, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 886, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1218, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        
+        setVisible(false);
+        
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if(jTable1.getSelectedRow()==-1){
+            JOptionPane.showMessageDialog(this, "Please select a product to delete", "Warning",2);
+        }
+        else{
+            try {
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                // Lấy row index và các giá trị cần thiết từ dòng được chọn
+                int rowIndex = jTable1.getSelectedRow(); // Lấy chỉ số của dòng được chọn
+                int cid = Integer.parseInt(jTable1.getValueAt(rowIndex, 0).toString()); 
+                int pid = Integer.parseInt(jTable1.getValueAt(rowIndex, 1).toString()); 
+                if(model.getRowCount()==1){
+                    JOptionPane.showMessageDialog(this, "Phải có đồ mới thanh toán được chứ ?\nRa đặt thêm đi");
+                    return;
+                }
+                else{
+                    // Gọi hàm xóa trong DAO
+                    if (cda.DeleteFromCart(cid, pid)) {
+                        JOptionPane.showMessageDialog(this, "Product removed from cart successfully!");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Failed to remove product from cart.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    while (model.getRowCount() > 0) {
+                        model.removeRow(0);
+                    }
+                    // Cập nhật lại bảng
+                    cda.getCart(jTable1);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error: ");
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        rowIndex=jTable1.getSelectedRow();
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        if(check()){
+            if(Double.parseDouble(jTextField5.getText())>0){
+                model=(DefaultTableModel) jTable1.getModel();
+                int paymentid = cda.getPaymentId();
+                String cName=jTextField2.getText().trim();
+                String proId="";
+                String pName="";
+                for(int i=0;i<model.getRowCount();i++){
+                    proId+=model.getValueAt(i, 1).toString()+", ";
+                    pName+=model.getValueAt(i, 2).toString()+", ";
+                }
+                double total=Double.parseDouble(jTextField3.getText());
+                String paymentDate = today.format(formatter);
+                Payment payment=new Payment();
+                payment.setPayid(paymentid);
+                payment.setcName(cName);
+                payment.setProId(proId);
+                payment.setpName(pName);
+                payment.setTotal(total);
+                payment.setPdate(paymentDate);
+                
+//                System.out.println("Payment ID: " + payment.getPayid());
+//                System.out.println("Customer Name: " + payment.getcName());
+//                System.out.println("Product IDs: " + payment.getProId());
+//                System.out.println("Product Names: " + payment.getpName());
+//                System.out.println("Total: " + payment.getTotal());
+//                System.out.println("Payment Date: " + payment.getPdate());
+
+                if(cda.insertPayment(payment)){
+                    JOptionPane.showMessageDialog(this, "Payment success");
+                    if (orderFrame != null) {
+                        orderFrame.dispose();  // Đóng OrderFrame
+                    }
+                    cda.deleteCart(cda.getCartID()-1);
+                    setVisible(false);  
+                    new HomeFrame().setVisible(true);
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "Payment Failed", "Warning",2);
+                }   
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Please trả đủ tiền ");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Lỗi check");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
+        // TODO add your handling code here:
+        cash();
+    }//GEN-LAST:event_jTextField4KeyReleased
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_formWindowClosed
+
+    public void cash() {
+        try {
+            double cash = Double.parseDouble(jTextField4.getText().trim());
+            double total = Double.parseDouble(jTextField3.getText().trim());
+            double change = (cash - total);
+            jTextField5.setText(String.valueOf(change));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Not enough cash entered", "Warning", 2);
+            jTextField5.setText("");
+        }
+    }
+    
+    public boolean check(){
+        if(jTextField2.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please enter your name!", "Warning",2);
+            return false;
+        }
+        if(jTextField4.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please enter your money", "Warning",2);
+            return false;
+        } 
+        return true;
+    }
     /**
      * @param args the command line arguments
      */
@@ -78,5 +378,19 @@ public class CartFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }

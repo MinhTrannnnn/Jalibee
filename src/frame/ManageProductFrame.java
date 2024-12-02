@@ -38,7 +38,7 @@ public class ManageProductFrame extends javax.swing.JFrame {
     private void tableProduct(){
         eda.getManageProducts(jTable1);
         model = (DefaultTableModel) jTable1.getModel();
-        jTable1.setRowHeight(100);
+        jTable1.setRowHeight(120);
         jTable1.setShowGrid(true);
         jTable1.setGridColor(Color.black);
         jTable1.setBackground(Color.white);
@@ -48,13 +48,13 @@ public class ManageProductFrame extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(3).setCellRenderer(new ManageProductFrame.ImageRenderer());
     }
     
-    private class ImageRenderer extends DefaultTableCellRenderer{
+    private class ImageRenderer extends DefaultTableCellRenderer{ // qhe ht
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             JLabel jl=new JLabel();
             if (value != null) {  // Kiểm tra xem value có phải là null không
                 byte[] bytes = (byte[]) value;
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(bytes).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(bytes).getImage().getScaledInstance(jTable1.getColumnModel().getColumn(3).getWidth(), 120, Image.SCALE_DEFAULT));
                 jl.setIcon(imageIcon);
             } else {
                 jl.setText("No Image");  // Hoặc bạn có thể để trống nếu không có hình ảnh
@@ -62,10 +62,10 @@ public class ManageProductFrame extends javax.swing.JFrame {
             // Nếu dòng được chọn, thay đổi nền thành màu xám
             if (isSelected) {
                 jl.setBackground(Color.GRAY);
-                jl.setOpaque(true);  // Đảm bảo rằng màu nền sẽ được hiển thị
+//                jl.setOpaque(true);  // Đảm bảo rằng màu nền sẽ được hiển thị
             } else {
                 jl.setBackground(table.getBackground());  // Trả lại nền mặc định khi không được chọn
-                jl.setOpaque(false);  // Tắt nền nếu không được chọn
+//                jl.setOpaque(false);  // Tắt nền nếu không được chọn
             }
             return jl;
         }
@@ -146,6 +146,7 @@ public class ManageProductFrame extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 200, 50));
 
+        jTable1.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -215,7 +216,7 @@ public class ManageProductFrame extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        new HomeEmployeeFrame().setVisible(true);
+        
         setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -236,8 +237,8 @@ public class ManageProductFrame extends javax.swing.JFrame {
             try {
                 Product product=new Product();
                 product.setPid(Integer.parseInt(model.getValueAt(rowIndex, 0).toString()));
-                product.setPname(model.getValueAt(rowIndex, 1).toString());
-                product.setPrice(Double.parseDouble(model.getValueAt(rowIndex, 2).toString()));
+                product.setPname(jTextField1.getText());
+                product.setPrice(Double.parseDouble(jTextField2.getText()));
                 if(eda.update(product)){
                     JOptionPane.showMessageDialog(this, "Product updated!");
                     jTable1.setModel(new DefaultTableModel(null,new Object[]{"ID","Name","Price","Image"}));

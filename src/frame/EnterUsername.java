@@ -5,6 +5,7 @@
 package frame;
 
 import javax.swing.JOptionPane;
+import model.Admin;
 import model.AdminDataAccess;
 
 /**
@@ -16,7 +17,9 @@ public class EnterUsername extends javax.swing.JFrame {
     /**
      * Creates new form EnterUsername
      */
-    AdminDataAccess ada =new AdminDataAccess();
+//    AdminDataAccess ada =new AdminDataAccess();
+    
+    Admin admin=new Admin();
     public EnterUsername() {
         initComponents();
     }
@@ -115,7 +118,7 @@ public class EnterUsername extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(check()){
             String username=jTextField1.getText().trim();
-            if(ada.isAdminExist(username)){
+            if(admin.isAdminExist(username)){
                 new ForgotPasswordFrame(username).setVisible(true);
                 setVisible(false);
             }

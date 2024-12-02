@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Admin;
 import model.AdminDataAccess;
 
 /**
@@ -20,6 +21,8 @@ public class LoginFrame extends javax.swing.JFrame {
     /**
      * Creates new form LoginFrame
      */
+    Admin admin=new Admin();
+   
     public LoginFrame() {
         initComponents();
         
@@ -245,9 +248,11 @@ public class LoginFrame extends javax.swing.JFrame {
         if(check()){
             String username=jTextField1.getText();
             String password=String.valueOf(jPasswordField1.getPassword());
-            if(ada.isAdminExist(username)){
-                if(ada.checkpass(username, password)){
+            if(admin.isAdminExist(username)){
+                if(admin.checkpass(username, password)){
                     JOptionPane.showMessageDialog(this, "Login Successfully !");
+                    new HomeEmployeeee().setVisible(true);
+                    setVisible(false);
                 }
                 else{
                     JOptionPane.showMessageDialog(this, "Password incorrect !");

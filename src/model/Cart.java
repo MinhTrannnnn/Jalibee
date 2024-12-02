@@ -4,6 +4,10 @@
  */
 package model;
 
+import java.util.List;
+
+
+
 /**
  * Lớp Cart đại diện cho thông tin của giỏ hàng, bao gồm mã giỏ hàng, mã sản phẩm, tên sản phẩm,số lượng, giá của sản phẩm và tổng tiền.
  */
@@ -14,7 +18,9 @@ public class Cart {
     private int qty; //Số lượng
     private double price; //Giá sản phẩm
     private double total; //Tổng tiền = sản phẩm * số lượng
-
+    private List<Product> products; // Danh sách sản phẩm trong giỏ hàng 
+    
+    
     public int getCid() {
         return cid;
     }
