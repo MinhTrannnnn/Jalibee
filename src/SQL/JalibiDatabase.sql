@@ -31,6 +31,6 @@ use food2;
 --     proid varchar(100) default null,
 --     pName varchar(200) default null,
 --     total double default null,
---     pDate date default null,
+--     pDate date default null,	
 --     primary key(payid)
 -- );
