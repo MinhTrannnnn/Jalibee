@@ -19,8 +19,8 @@ public class ForgotPasswordFrame extends javax.swing.JFrame {
      * Creates new form ForgotPasswordFrame
      */
     Color notEdit = new Color(204, 204, 204);
-//    AdminDataAccess ada=new AdminDataAccess();
-    Admin admin=new Admin();
+    AdminDataAccess ada=new AdminDataAccess();
+//    Admin admin=new Admin();
     public ForgotPasswordFrame(String username) {
         initComponents();
         jTextField2.setEnabled(false);
@@ -189,9 +189,9 @@ public class ForgotPasswordFrame extends javax.swing.JFrame {
         if(check()){
             String username=jTextField2.getText().trim();
             String answer=jTextField4.getText().trim();
-            if(admin.checkAns(username, answer)){
+            if(ada.checkAns(username, answer)){
                 String password=String.valueOf(jPasswordField1.getPassword());
-                admin.setPassword(username, password);
+                ada.setPassword(username, password);
                 JOptionPane.showMessageDialog(this, "Password Updated");
                 new LoginFrame().setVisible(true);
                 setVisible(false);
@@ -215,7 +215,7 @@ public class ForgotPasswordFrame extends javax.swing.JFrame {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
-        if (admin.getSecurityQues(jTextField2.getText())) {
+        if (ada.getSecurityQues(jTextField2.getText())) {
             jTextField4.setEnabled(true);
             jPasswordField1.setEnabled(true);
         } else {

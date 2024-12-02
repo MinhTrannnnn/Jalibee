@@ -19,14 +19,28 @@ public class EmployeeDataAccess {
     PreparedStatement ps;
     Statement st;
     ResultSet rs;
+    public int getMaxProductID(){
+        int pid=0;
+        try {
+            ps=con.prepareStatement("select max(pid) from product");
+            rs=ps.executeQuery();
+            while(rs.next()){
+                pid=rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDataAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pid+1;
+    }
     
     public boolean insertProduct(Product p){
-        String sql="insert into product(pname,price,image) values (?,?,?)";
+        String sql="insert into product(pid,pname,price,image) values (?,?,?,?)";
         try {
             ps=con.prepareStatement(sql);
-            ps.setString(1, p.getPname());
-            ps.setDouble(2, p.getPrice());
-            ps.setBytes(3, p.getImage());
+            ps.setInt(1, p.getPid());
+            ps.setString(2, p.getPname());
+            ps.setDouble(3, p.getPrice());
+            ps.setBytes(4, p.getImage());
             return ps.executeUpdate()>0;
         } catch (SQLException ex) {
             return false;

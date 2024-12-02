@@ -21,7 +21,7 @@ public class LoginFrame extends javax.swing.JFrame {
     /**
      * Creates new form LoginFrame
      */
-    Admin admin=new Admin();
+//    Admin admin=new Admin();
    
     public LoginFrame() {
         initComponents();
@@ -248,8 +248,8 @@ public class LoginFrame extends javax.swing.JFrame {
         if(check()){
             String username=jTextField1.getText();
             String password=String.valueOf(jPasswordField1.getPassword());
-            if(admin.isAdminExist(username)){
-                if(admin.checkpass(username, password)){
+            if(ada.isAdminExist(username)){
+                if(ada.checkpass(username, password)){
                     JOptionPane.showMessageDialog(this, "Login Successfully !");
                     new HomeEmployeeee().setVisible(true);
                     setVisible(false);

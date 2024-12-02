@@ -288,7 +288,7 @@ public class CartFrame extends javax.swing.JFrame {
                     if (orderFrame != null) {
                         orderFrame.dispose();  // Đóng OrderFrame
                     }
-                    cda.deleteCart(cda.getCartID()-1);
+//                    cda.deleteCart(cda.getCartID()-1);
                     setVisible(false);  
                     new HomeFrame().setVisible(true);
                 }

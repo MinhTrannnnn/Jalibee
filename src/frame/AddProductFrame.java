@@ -161,6 +161,7 @@ public class AddProductFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Product product=new Product();
+            product.setPid(eda.getMaxProductID());
             product.setPname(jTextField1.getText().trim());
             product.setPrice(Double.parseDouble(jTextField2.getText().trim()));
             product.setImage(Files.readAllBytes(this.file.toPath()));
