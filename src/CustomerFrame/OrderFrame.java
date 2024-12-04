@@ -278,6 +278,7 @@ public class OrderFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
         if(jTextField2.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Please select a product", "Warning",2);
         } 
@@ -301,10 +302,11 @@ public class OrderFrame extends javax.swing.JFrame {
                     cart.setQty(qty);
                     cart.setPrice(price);
                     cart.setTotal(sum);
-                    total+=sum;
-                    jLabel2.setText(String.format("Total ($):"+"%.2f",total ));
+                    
                     if(cda.insertCart(cart)){
                         JOptionPane.showMessageDialog(this, "Product added!");
+                        total=cda.getTotalFromCart(cid);
+                        jLabel2.setText(String.format("Total ($):"+"%.2f",total));
                         clear();
                     }
                 }
@@ -345,7 +347,7 @@ public class OrderFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    public static javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

@@ -231,6 +231,7 @@ public class CartFrame extends javax.swing.JFrame {
                     // Gọi hàm xóa trong DAO
                     if (cda.DeleteFromCart(cid, pid)) {
                         JOptionPane.showMessageDialog(this, "Product removed from cart successfully!");
+                        
                     } else {
                         JOptionPane.showMessageDialog(this, "Failed to remove product from cart.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
@@ -240,6 +241,8 @@ public class CartFrame extends javax.swing.JFrame {
                     // Cập nhật lại bảng
                     cda.getCart(jTable1);
                     jTextField3.setText(String.format("%.2f", cda.getTotalFromCart(cda.getCartID() - 1)));
+                    
+                    OrderFrame.jLabel2.setText(String.format("Total ($):"+"%.2f", cda.getTotalFromCart(cda.getCartID() - 1)));
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error: ");
