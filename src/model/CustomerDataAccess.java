@@ -126,7 +126,7 @@ public class CustomerDataAccess {
             ps.setInt(1, cid);
             rs=ps.executeQuery();
             while(rs.next()){
-                total= rs.getInt(1);
+                total= rs.getDouble(1);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDataAccess.class.getName()).log(Level.SEVERE, null, ex);

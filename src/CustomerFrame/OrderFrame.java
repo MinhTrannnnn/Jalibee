@@ -43,7 +43,8 @@ public class OrderFrame extends javax.swing.JFrame {
         initComponents();
         tableProduct();        
         jTextField2.setEditable(false);
-        cid=cda.getCartID();        
+        cid=cda.getCartID();
+               
     }
     
     public void tableProduct(){
@@ -67,7 +68,7 @@ public class OrderFrame extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(1).setResizable(false);
         jTable1.getColumnModel().getColumn(2).setResizable(false);
         jTable1.getColumnModel().getColumn(3).setResizable(false);
-        jTable1.getColumnModel().getColumn(3).setCellRenderer(new OrderFrame.ImageRenderer());
+        jTable1.getColumnModel().getColumn(3).setCellRenderer(new OrderFrame.ImageRenderer()); // tạo một đối tượng mới của lớp ImageRenderer được định nghĩa trong lớp OrderFrame.
     }
     
     private class ImageRenderer extends DefaultTableCellRenderer{

@@ -179,15 +179,15 @@ public class AddProductFrame extends javax.swing.JFrame {
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         // TODO add your handling code here:
-        xx = evt.getX();
-        xy = evt.getY();
+        xx = evt.getX(); // Lưu vị trí X của con trỏ chuột khi nhấn
+        xy = evt.getY(); // Lưu vị trí Y của con trỏ chuột khi nhấn
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         // TODO add your handling code here:
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xx, y - xy);
+        int x = evt.getXOnScreen(); // Lấy vị trí X của chuột trên toàn màn hình
+        int y = evt.getYOnScreen(); // Lấy vị trí Y của chuột trên toàn màn hình
+        this.setLocation(x - xx, y - xy); // Di chuyển cửa sổ tới vị trí mới
     }//GEN-LAST:event_formMouseDragged
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

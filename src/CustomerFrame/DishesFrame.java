@@ -250,14 +250,7 @@ public class DishesFrame extends javax.swing.JFrame {
             } else {
                 jl.setText("No Image");  // Hoặc bạn có thể để trống nếu không có hình ảnh
             }
-            // Nếu dòng được chọn, thay đổi nền thành màu xám
-            if (isSelected) {
-                jl.setBackground(Color.GRAY);
-                 // Đảm bảo rằng màu nền sẽ được hiển thị
-            } else {
-                jl.setBackground(table.getBackground());  // Trả lại nền mặc định khi không được chọn
-                  // Tắt nền nếu không được chọn
-            }
+            
             return jl;
         }
     }

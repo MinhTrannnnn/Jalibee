@@ -239,6 +239,7 @@ public class CartFrame extends javax.swing.JFrame {
                     }
                     // Cập nhật lại bảng
                     cda.getCart(jTable1);
+                    jTextField3.setText(String.format("%.2f", cda.getTotalFromCart(cda.getCartID() - 1)));
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error: ");

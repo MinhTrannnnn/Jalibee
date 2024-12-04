@@ -22,15 +22,15 @@ public class AdminDataAccess {
     Connection con=MyConnection.getConnection();
     // Truy vấn tham số trong sql có chứa các biến ? để truyền tham số 
     PreparedStatement ps;
-    // Khai báo đối tượng Statement để thực thi các câu lệnh SQL không có tham số cung cấp phương thức cho truy vấn khác nhau dùng để thực hiện các lệnh sql đơn giản 
+    
     Statement st;
-    // Khai báo đối tượng ResultSet để lưu trữ kết quả của câu truy vấn SQL (SELECT)
+    
     ResultSet rs;
     
     public int getMaxAdmin() throws SQLException{
         int row=0;
         try {
-            st=con.createStatement();  // Tạo đối tượng Statement để thực hiện các câu lệnh SQL
+            st=con.createStatement();  
             rs=st.executeQuery("select max(id) from admin"); // Thực hiện truy vấn SQL, trả kết quả về resultset
             while(rs.next()){
                 row=rs.getInt(1);
