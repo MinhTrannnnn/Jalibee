@@ -14,7 +14,6 @@ public class Payment {
     private String pName; // Tên sản phẩm
     private double total; // Tổng tiền của lần thanh toán
     private String pdate; // Ngày thanh toán     
-    private Cart cart; 
     
     // Phương thức lấy giá trị của pid
     public int getPayid() {

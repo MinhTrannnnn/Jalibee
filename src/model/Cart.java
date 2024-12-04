@@ -18,7 +18,6 @@ public class Cart {
     private int qty; //Số lượng
     private double price; //Giá sản phẩm
     private double total; //Tổng tiền = sản phẩm * số lượng
-    private List<Product> products; // Danh sách sản phẩm trong giỏ hàng 
     
     
     public int getCid() {
