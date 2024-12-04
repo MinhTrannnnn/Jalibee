@@ -382,9 +382,9 @@ public class HomeEmployeeee extends javax.swing.JFrame {
         ViewOrderPanelLayout.setHorizontalGroup(
             ViewOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewOrderPanelLayout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 923, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addContainerGap(249, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         ViewOrderPanelLayout.setVerticalGroup(
             ViewOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
